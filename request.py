@@ -61,8 +61,8 @@ for offset in range(0, numResults, GROUP_SIZE):
             req = requests.get(value["contentUrl"], timeout=30)
 
             ext = value["contentUrl"][value["contentUrl"].rfind("."):]
-            path = os.path.sep.join([args["output"], "{}{}".format(
-                str(total).zfill(8), ext)])
+            path = os.path.sep.join([args["output"], "{}{}.jpg".format(
+                str(total).zfill(8), ext.slipt(".jpg")[0])])
 
             f = open(path, "wb")
             f.write(req.content)
