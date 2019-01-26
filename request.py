@@ -56,14 +56,13 @@ for offset in range(0, numResults, GROUP_SIZE):
     search.raise_for_status()
     results = search.json()
 
-    path = ""
     for value in results["value"]:
         try:
             req = requests.get(value["contentUrl"], timeout=30)
 
             ext = value["contentUrl"][value["contentUrl"].rfind("."):]
             path = os.path.sep.join([args["output"], "{}{}.jpg".format(
-                str(total).zfill(8), ext.slipt(".jpg")[0])])
+                str(total).zfill(8), ext.split(".jpg")[0])])
 
             f = open(path, "wb")
             f.write(req.content)
@@ -78,16 +77,16 @@ for offset in range(0, numResults, GROUP_SIZE):
                            exceptions.ConnectionError,
                            exceptions.Timeout
                           ]:
-                print("[ERROR] {}".format(e))
                 print("[INFO] skipping: {}".format(value["contentUrl"]))
                 continue
+            print("[ERROR] {}".format(e))
         
-        # image = cv2.imread(path)
+        image = cv2.imread(path)
 
-        # if image is None :
-        #     print("[INFO] deleting: {}".format(path))
-        #     os.remove(path)
-        #     continue
+        if image is None :
+            print("[INFO] deleting: {}".format(path))
+            os.remove(path)
+            continue
 
         total += 1
         bar.update(total)
