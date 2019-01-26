@@ -77,9 +77,9 @@ for offset in range(0, numResults, GROUP_SIZE):
                            exceptions.ConnectionError,
                            exceptions.Timeout
                           ]:
-                print("[INFO] skipping: {}".format(value["contentUrl"]))
+                print("\n[INFO] skipping: {}".format(value["contentUrl"]))
                 continue
-            print("[ERROR] {}".format(e))
+            print("\n[ERROR] {}".format(e))
         
         image = cv2.imread(path)
 
