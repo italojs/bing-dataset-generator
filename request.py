@@ -56,6 +56,7 @@ for offset in range(0, numResults, GROUP_SIZE):
     search.raise_for_status()
     results = search.json()
 
+    path = ""
     for value in results["value"]:
         try:
             req = requests.get(value["contentUrl"], timeout=30)
@@ -77,6 +78,7 @@ for offset in range(0, numResults, GROUP_SIZE):
                            exceptions.ConnectionError,
                            exceptions.Timeout
                           ]:
+                print("[ERROR] {}".format(e))
                 print("[INFO] skipping: {}".format(value["contentUrl"]))
                 continue
         
