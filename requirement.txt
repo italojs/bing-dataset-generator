@@ -1,0 +1,4 @@
+progressbar
+argparse
+requests
+cv2
