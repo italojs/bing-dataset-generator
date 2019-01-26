@@ -82,12 +82,12 @@ for offset in range(0, numResults, GROUP_SIZE):
                 print("[INFO] skipping: {}".format(value["contentUrl"]))
                 continue
         
-        image = cv2.imread(path)
+        # image = cv2.imread(path)
 
-        if image is None:
-            print("[INFO] deleting: {}".format(path))
-            os.remove(path)
-            continue
+        # if image is None :
+        #     print("[INFO] deleting: {}".format(path))
+        #     os.remove(path)
+        #     continue
 
         total += 1
         bar.update(total)
